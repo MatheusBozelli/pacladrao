@@ -1,6 +1,7 @@
 import 'dart:async';
-import 'dart:ffi';
+// import 'dart:ffi';
 import 'dart:math';
+import 'package:responsive_styles/responsive_styles.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -593,8 +594,17 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    var responsive = Responsive(context);
+
     return Scaffold(
       backgroundColor: Colors.white,
+      // backgroundColor: responsive.value({
+      //   Breakpoints.xs: Colors.red.shade200,
+      //   Breakpoints.sm: Colors.yellow.shade200,
+      //   Breakpoints.md: Colors.green.shade200,
+      //   Breakpoints.lg: Colors.blue.shade200,
+      //   Breakpoints.xl: Colors.purple.shade200,
+      // }),
       body: Column(
         children: [
           Expanded(
@@ -616,88 +626,86 @@ class _HomePageState extends State<HomePage> {
                 }
                 // print(direction);
               },
-              child: Container(
-                child: GridView.builder(
-                  padding: (MediaQuery.of(context).size.height.toInt() * 0.0139)
-                              .toInt() >
-                          10
-                      ? const EdgeInsets.only(top: 80)
-                      : const EdgeInsets.only(top: 20),
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: numberOfSquares,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: numberInRow),
-                  itemBuilder: (BuildContext context, int index) {
-                    if (mouthClosed && player == index) {
-                      switch (direction) {
-                        case "left":
-                          return MyPlayerOne();
-                        case "right":
-                          return Transform.scale(
-                            scaleX: -1,
-                            child: MyPlayerOne(),
-                          );
-                        case "up":
-                          return Transform.rotate(
-                            angle: pi /2,
-                            child: MyPlayerOne(),
-                          );
-                        case "down":
-                          return Transform.rotate(
-                            angle: 3 * pi / 2,
-                            child: MyPlayerOne(),
-                          );
-                        default:
-                          return MyPlayerOne();
-                      }
-                    } else if (player == index) {
-                      switch (direction) {
-                        case "left":
-                          return MyPlayer();
-                        case "right":
-                          return Transform.scale(
-                            scaleX: -1,
-                            child: MyPlayer(),
-                          );
-                        case "up":
-                          return Transform.rotate(
-                            angle: pi / 2,
-                            child: MyPlayer(),
-                          );
-                        case "down":
-                          return Transform.rotate(
-                            angle: 3 * pi / 2,
-                            child: MyPlayer(),
-                          );
-                        default:
-                          return MyPlayer();
-                      }
-                    } else if (ghost == index) {
-                      return MyGhost();
-                    } else if (ghost2 == index) {
-                      return MyGhost2();
-                    } else if (ghost3 == index) {
-                      return MyGhost3();
-                    } else if (barriers.contains(index)) {
-                      return MyPixel(
-                        innerColor: Colors.blue[900],
-                        outerColor: Colors.blue[800],
-                        // child: Text(index.toString()),
-                      );
-                    } else if (preGame || food.contains(index)) {
-                      return MyPath(
-                        innerColor: Colors.yellow,
-                        outerColor: Colors.white,
-                        // child: Text(index.toString()),
-                      );
-                    } else {
-                      return MyPath(
-                        innerColor: Colors.white,
-                        outerColor: Colors.white,
-                      );
+              child: GridView.builder(
+                padding: (MediaQuery.of(context).size.height.toInt() * 0.0139)
+                            .toInt() >
+                        10
+                    ? const EdgeInsets.only(top: 80)
+                    : const EdgeInsets.only(top: 20),
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: numberOfSquares,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: numberInRow),
+                itemBuilder: (BuildContext context, int index) {
+                  if (mouthClosed && player == index) {
+                    switch (direction) {
+                      case "left":
+                        return MyPlayerOne();
+                      case "right":
+                        return Transform.scale(
+                          scaleX: -1,
+                          child: MyPlayerOne(),
+                        );
+                      case "up":
+                        return Transform.rotate(
+                          angle: pi /2,
+                          child: MyPlayerOne(),
+                        );
+                      case "down":
+                        return Transform.rotate(
+                          angle: 3 * pi / 2,
+                          child: MyPlayerOne(),
+                        );
+                      default:
+                        return MyPlayerOne();
                     }
-                  },
-                ),
+                  } else if (player == index) {
+                    switch (direction) {
+                      case "left":
+                        return MyPlayer();
+                      case "right":
+                        return Transform.scale(
+                          scaleX: -1,
+                          child: MyPlayer(),
+                        );
+                      case "up":
+                        return Transform.rotate(
+                          angle: pi / 2,
+                          child: MyPlayer(),
+                        );
+                      case "down":
+                        return Transform.rotate(
+                          angle: 3 * pi / 2,
+                          child: MyPlayer(),
+                        );
+                      default:
+                        return MyPlayer();
+                    }
+                  } else if (ghost == index) {
+                    return MyGhost();
+                  } else if (ghost2 == index) {
+                    return MyGhost2();
+                  } else if (ghost3 == index) {
+                    return MyGhost3();
+                  } else if (barriers.contains(index)) {
+                    return MyPixel(
+                      innerColor: Colors.blue[900],
+                      outerColor: Colors.blue[800],
+                      // child: Text(index.toString()),
+                    );
+                  } else if (preGame || food.contains(index)) {
+                    return MyPath(
+                      innerColor: Colors.yellow,
+                      outerColor: Colors.white,
+                      // child: Text(index.toString()),
+                    );
+                  } else {
+                    return MyPath(
+                      innerColor: Colors.white,
+                      outerColor: Colors.white,
+                    );
+                  }
+                },
               ),
             ),
           ),
