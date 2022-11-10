@@ -15,12 +15,12 @@ import 'package:pacladrao/player_1.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:pacladrao/player_1.dart';
 
-class HomePage extends StatefulWidget {
+class PlayMedium extends StatefulWidget {
   @override
-  _HomePageState createState() => _HomePageState();
+  _PlayMediumState createState() => _PlayMediumState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _PlayMediumState extends State<PlayMedium> {
   static int numberInRow = 11;
   int numberOfSquares = numberInRow * 16;
   int player = numberInRow * 14 + 1;
@@ -195,7 +195,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                         padding: const EdgeInsets.all(10.0),
-                        child: const Text('Restart'),
+                        child: const Text('Roubar mais'),
                       ),
                     )
                   ],
