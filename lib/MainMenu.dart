@@ -9,10 +9,14 @@ class MainMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Inicio'),
-      ),
-      body: Center(
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("lib/images/background.png"),
+            fit: BoxFit.fitHeight,
+          ),
+        ),
+        child: Center(
           child: Column(
             children: [
               Padding(
@@ -53,6 +57,8 @@ class MainMenu extends StatelessWidget {
               ),
             ],
       )),
+      )
+      // body: 
     );
   }
 }
